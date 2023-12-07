@@ -1,0 +1,20 @@
+from bs4 import BeautifulSoup
+import requests
+# スクレイピング対象のURLを貼る//
+url='https://www.family.co.jp/'
+
+# HTTPリクエストを送信//
+response = requests.get(url)
+
+#ページのHTMLを解析//
+soup=BeautifulSoup(response.text, 'html.parser')
+
+#商品データを取得//
+products = soup.find_all('div', class_='product')
+
+# 商品データを表示//
+for product in products:
+    product_name = product.find('span', class_='product-name').text
+    product_price = product.find('span', class_='product-price').text
+    print(f"商品名: {product_name}, 価格: {product_price}")
+
