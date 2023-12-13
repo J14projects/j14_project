@@ -1,20 +1,23 @@
 from bs4 import BeautifulSoup
 import requests
 # スクレイピング対象のURLを貼る//
-url='https://www.family.co.jp/goods/newgoods.html'
+url ='https://www.family.co.jp/goods/newgoods.html'
+
+#アクセスするためのURLをtarget_urlに格納する
+target_url = url.format(1)
+print(target_url)
 
 # HTTPリクエストを送信//
-response = requests.get(url)
+response = requests.get(target_url)
 
 #ページのHTMLを解析//
-soup=BeautifulSoup(response.text, 'html.parser')
+soup=BeautifulSoup(response.text,'html.parser')
 
-#商品データを取得//
-product_elements = soup.find_all('div', class_='product')
+#商品データを取得
+contents = soup.find_all('div', class_='ly-mod-layout-3clm')
 
-# 商品データを表示//
-for product in product_elements:
-    product_name = product.find("h3").text
-    product_price = product.find('span', class_='product-price').text
-    print(f"商品名: {product_name}, 価格: {product_price}")
+#変数contentsの中身を確認する
+len(contents)
+
+content = contents=(0)
 
